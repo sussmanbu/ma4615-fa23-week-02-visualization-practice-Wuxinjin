@@ -132,28 +132,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>I’ve include 4 different data sets. They all have the same data but have it represented in different ways. Try using the different data sets and see which ones are good for making which plots.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(covid_data_count, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> Cases)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1385 rows containing missing values (`geom_point()`).</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(covid_data_long, <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> count<span class="sc">/</span>population, <span class="at">color =</span> race)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Week_02_Covid_Vis_files/figure-html/first_plot-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>If you want to only look at a specific state, you can do it like this. For now, see what you can do just using <code>ggplot</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>covid_data_count <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"AZ"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> Cases, <span class="at">color =</span> race)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>covid_data_count <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"AZ"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> Cases, <span class="at">color =</span> race)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Week_02_Covid_Vis_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ol type="1">
-<li><p>Write code for a plot and describe what you observe?</p></li>
-<li><p>Are there any conclusions you can draw?</p></li>
-<li><p>What were you not able to do due to not having the R knowledge? I am not able to calculate the percentage of cases vs total population in the dataset, it is very important to see the percentage of the population getting covid since the population of different state is different, directly comparing them can’t tell much information.</p></li>
-<li><p>What other data would be useful to better understand this data? The total population of each race and the percentage of population of each race. Since the total population of each race is different, it is hard to compare the degree of infection of covid-19 on each race just by analyzing the total cases for each race.</p></li>
+<li><p>Write code for a plot and describe what you observe? ggplot(covid_data_long, aes(x = date, y = count/population, color = race)) +geom_point() I observed that the percentage of infection is almost the same for all race, except the NHPI, which the percentage of infection of COVID has been increasing through the date.</p></li>
+<li><p>Are there any conclusions you can draw? The population of NHPI is small comparing to other race, however, a large portion has got COVID-19, in fact the percentage is increasing. This might indicate that Covid-19 has been favored to spread in certain environment which is closed to the living areas with large NHPI population. By closely looking at the reason of the increase of cases in NHPI population, we might be able to find out.</p></li>
+<li><p>What were you not able to do due to not having the R knowledge? Due to not having the R knowledge, I felt hard to construct more graphs representing the data. For example it might be more easier to see specific state’s data if I can create a histogram or pie chart.</p></li>
+<li><p>What other data would be useful to better understand this data? It might be useful to contain some other data such as temperature, population density given the area of state, and so on. Since the spreading of such diseases cannot just be analyze based on population, race or state, it should be also affecting by many other variables.(For example, place with higher temperature might cause more cases)</p></li>
 </ol>
 
 </main>
